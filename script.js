@@ -89,7 +89,7 @@ function displayGuests() {
     guestList.forEach(guest => {
         const guestDiv = document.createElement('div');
         guestDiv.className = 'guest-item';
-        guestDiv.textContent = `Name: ${guest.name}, Room: ${guest.room || 'N/A'}, Mobile: ${guest.mobile}, Aadhar Card: ${guest.aadhar}`;
+        guestDiv.textContent = `Name: ${guest.name}, Room: ${guest.room},  Advance: ${guest.advance},Mobile: ${guest.mobile}, Aadhar Card: ${guest.aadhar}`;
         guestListDiv.appendChild(guestDiv);
     });
 }
