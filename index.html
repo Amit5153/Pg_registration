@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Registration and Bill Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navigation Section -->
+    <div>
+        <button onclick="showSection('guest-registration')">Guest Registration</button>
+        <!-- <button onclick="showSection('bill-generate')">Generate Bill</button> -->
+        <button onclick="showSection('bill-generate')">Generate Bill</button>
+
+        <button onclick="window.open('https://pg-income-k02ktf3x6-amit5153s-projects.vercel.app/')">PG_income </button>
+        <button onclick="window.open('https://pg-expense-glble5his-amit5153s-projects.vercel.app/')">pG_expense</button>
+        <button onclick="window.open('https://example.com/guest-management-guide')">Guest Management Guide</button>
+    </div>
+
+    <!-- Guest Registration Section -->
+    <div id="guest-registration" class="toggle-section">
+        <h2>Guest Registration</h2>
+        <form id="registrationForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter guest name" required>
+
+            <label for="mobile">Mobile:</label>
+            <input type="text" id="mobile" placeholder="Enter mobile Number" required>
+
+            <label for="aadhar">Aadhar Number:</label>
+            <input type="text" id="aadhar" placeholder="Enter Aadhar Number" required>
+
+            <label for="room">Room Number:</label> <!-- Added room number input -->
+            <input type="text" id="room" placeholder="Enter Room Number"required>
+
+            <label for="advance">Advance Payment:</label>
+            <input type="number" id="advance" placeholder="Enter Advance" required>
+
+            <button type="submit">Register Guest</button>
+        </form>
+
+        <!-- Guest List -->
+        <div id="guestList"></div>
+    </div>
+
+    <!-- Bill Generation Section -->
+    <div id="bill-generate" class="toggle-section" style="display:none;">
+        <h2>Generate Bill</h2>
+        <form id="billForm">
+            <label for="guestName">Guest Name:</label>
+<input type="text" id="guestName" placeholder="Enter guest name" required>
+
+<label for="roomNumber">Room Number:</label>
+<input type="text" id="roomNumber" placeholder="Enter room number" required>
+
+<label for="electricBill">Electric Bill:</label>
+<input type="number" id="electricBill" placeholder="Enter electric bill amount" required>
+
+<label for="roomRent">Room Rent:</label>
+<input type="number" id="roomRent" placeholder="Enter room rent amount" required>
+
+<label for="utilities">Utilities:</label>
+<input type="number" id="utilities" placeholder="Enter utility charges" required>
+
+            <button type="submit">Generate Bill</button>
+        </form>
+
+        <!-- Generated Bill Output -->
+        <div id="billOutput"></div>
+
+        <!-- Download Buttons -->
+        <button id="downloadPDF">Download PDF</button>
+        <button id="downloadCSV">Download CSV</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script src="script.js"></script>
+</body>
+</html>
