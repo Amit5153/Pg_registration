@@ -14,15 +14,15 @@
         <!-- <button onclick="showSection('bill-generate')">Generate Bill</button> -->
         <button onclick="showSection('bill-generate')">Generate Bill</button>
 
-        <button onclick="window.open('https://pg-income.vercel.app/')">PG_income </button>
-        <button onclick="window.open('https://pg-expense.vercel.app/')">pG_expense</button>
+        <button onclick="window.open('https://pg-income-k02ktf3x6-amit5153s-projects.vercel.app/')">PG_income </button>
+        <button onclick="window.open('https://pg-expense-glble5his-amit5153s-projects.vercel.app/')">pG_expense</button>
         <button onclick="window.open('https://example.com/guest-management-guide')">Guest Management Guide</button>
     </div>
 
     <!-- Guest Registration Section -->
     <div id="guest-registration" class="toggle-section">
         <h2>Guest Registration</h2>
-        <form id="registrationForm">
+        <form id="guestForm">
             <label for="name">Name:</label>
             <input type="text" id="name" placeholder="Enter guest name" required>
 
@@ -38,11 +38,20 @@
             <label for="advance">Advance Payment:</label>
             <input type="number" id="advance" placeholder="Enter Advance" required>
 
+            <label for="checkin">Check-in Date:</label>
+            <input type="date" id="checkin" required>
+            <label for="checkout">Check-out Date:</label>
+            <input type="date" id="checkout">
+
             <button type="submit">Register Guest</button>
         </form>
 
         <!-- Guest List -->
+       
+        
+        <p> <span id="totalAdvance">0</span></p>
         <div id="guestList"></div>
+        
     </div>
 
     <!-- Bill Generation Section -->
@@ -77,6 +86,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+    <!-- <div id="toastContainer" style="position: fixed; top: 10px; right: 10px; z-index: 9999;"></div>S -->
+    <div id="toastContainer" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;"></div>
+
+
 
     <script src="script.js"></script>
 </body>
