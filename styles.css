@@ -195,35 +195,6 @@ button.download-csv:hover {
 }
 
 
-/* Toast Notification */
-.toast {
-    visibility: hidden; /* Hidden by default */
-    min-width: 250px; /* Minimum width */
-    margin-left: -125px; /* Center the toast */
-    background-color: yellow; /* Yellow background color */
-    color: black; /* Black text color */
-    text-align: center; /* Centered text */
-    border-radius: 8px; /* Rounded corners */
-    padding: 16px; /* Padding */
-    position: fixed; /* Position fixed */
-    z-index: 1; /* Sit on top */
-    left: 50%; /* Center horizontally */
-    bottom: 30px; /* Place at the bottom */
-    font-size: 17px; /* Font size */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
-    transition: opacity 0.5s, visibility 0.5s; /* Smooth transition for visibility and opacity */
-}
-
-.toast.show {
-    visibility: visible; /* Show the toast */
-    opacity: 1; /* Fade in */
-}
-
-.toast.hide {
-    visibility: hidden; /* Hide the toast */
-    opacity: 0; /* Fade out */
-}
-
 
 /* General Styles */
 body {
@@ -322,4 +293,26 @@ h2::after {
     background-color: #21CBF3;
     margin: 10px auto;
     border-radius: 3px;
+}
+
+
+.expense-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.expense-table th, .expense-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.expense-table th {
+    background-color: #ff4e50; /* Match with PDF header */
+    color: white;
+}
+
+.expense-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
