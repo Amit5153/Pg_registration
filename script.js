@@ -61,55 +61,107 @@ function showSection(sectionId) {
     document.getElementById(sectionId).style.display = 'block';
 }
 
+
 function generateBill(event) {
     event.preventDefault();
 
+    // Getting values from input fields
     const guestName = document.getElementById('guestName').value;
     const roomNumber = document.getElementById('roomNumber').value;
-    const electricBill = parseFloat(document.getElementById('electricBill').value);
-    const roomRent = parseFloat(document.getElementById('roomRent').value);
-    const utilities = parseFloat(document.getElementById('utilities').value);
-    const total = electricBill + roomRent + utilities;
+    const electricBill = parseFloat(document.getElementById('electricBill').value) || 0;
+    const roomRent = parseFloat(document.getElementById('roomRent').value) || 0;
+    const advance = parseFloat(document.getElementById('advance').value) || 0;
+    const utilities = parseFloat(document.getElementById('utilities').value) || 0;
 
+    // Calculating the total (subtract advance as it's pre-paid)
+    const total = (electricBill + roomRent + utilities) - advance;
+
+    // Bill details to display
     const billDetails = `
         <h2>Monthly Bill</h2>
         <p>Name: ${guestName}</p>
         <p>Room Number: ${roomNumber}</p>
-        <p>Electric Bill: ${electricBill.toFixed(2)}</p>
+        <p>Electric Bill: ₹${electricBill.toFixed(2)}</p>
         <p>Room Rent: ₹${roomRent.toFixed(2)}</p>
+        <p>Advance: ₹${advance.toFixed(2)}</p>
         <p>Utilities: ₹${utilities.toFixed(2)}</p>
         <p><strong>Total: ₹${total.toFixed(2)}</strong></p>
     `;
 
+    // Display the bill details
     document.getElementById('billOutput').innerHTML = billDetails;
 
-    // Add event listeners for download buttons
-    document.getElementById('downloadPDF').onclick = () => downloadPDF(billDetails);
-    document.getElementById('downloadCSV').onclick = () => downloadCSV(guestName, roomNumber, electricBill, roomRent, utilities, total);
+    // Attach event listeners for downloading the bill if the buttons exist
+    const downloadPDFButton = document.getElementById('downloadPDF');
+    const downloadCSVButton = document.getElementById('downloadCSV');
+
+    if (downloadPDFButton) {
+        downloadPDFButton.onclick = () => downloadPDF(billDetails);
+    } else {
+        console.error("Download PDF button not found!");
+    }
+
+    if (downloadCSVButton) {
+        downloadCSVButton.onclick = () => downloadCSV(guestName, roomNumber, electricBill, roomRent, advance, utilities, total);
+    } else {
+        console.error("Download CSV button not found!");
+    }
 }
 
 function displayGuests() {
     const guests = JSON.parse(localStorage.getItem('guests')) || [];
     const guestListDiv = document.getElementById('guestList');
-    guestListDiv.innerHTML = ''; // Clear previous list
 
+    // Clear previous data to avoid duplication
+    guestListDiv.innerHTML = '';
+
+    if (guests.length === 0) {
+        guestListDiv.innerHTML = '<p>No guests available.</p>';
+        return;
+    }
+
+    // Create table for guest list
+    const table = document.createElement('table');
+    table.className = 'guest-table';
+    table.innerHTML = `
+        <tr>
+            <th>Name</th>
+            <th>Room</th>
+            <th>Advance</th>
+            <th>Mobile</th>
+            <th>Aadhar Card</th>
+            <th>Check-in</th>
+            <th>Check-out</th>
+            <th>Actions</th>
+        </tr>
+    `;
+
+    // Populate the table with guest data
     guests.forEach((guest, index) => {
-        const guestDiv = document.createElement('div');
-        guestDiv.className = 'guest-item';
-        guestDiv.innerHTML = `
-            Name: ${guest.name}, 
-            Room: ${guest.room || ''}, 
-            Advance: ₹${guest.advance}, 
-            Mobile: ${guest.mobile}, 
-            Aadhar Card: ${guest.aadhar}, 
-            Check-in: ${guest.checkin}, 
-            Check-out: ${guest.checkout}
-            <button onclick="editGuest(${index})">Edit</button>
-            <button onclick="deleteGuest(${index})">Delete</button>
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${guest.name}</td>
+            <td>${guest.room || ''}</td>
+            <td>₹${guest.advance}</td>
+            <td>${guest.mobile}</td>
+            <td>${guest.aadhar}</td>
+            <td>${guest.checkin}</td>
+            <td>${guest.checkout}</td>
+            <td>
+                <button onclick="editGuest(${index})">Edit</button>
+                <button onclick="deleteGuest(${index})">Delete</button>
+            </td>
         `;
-        guestListDiv.appendChild(guestDiv);
+        table.appendChild(row);
     });
+
+    guestListDiv.appendChild(table);
 }
+
+// Attach displayGuests to the button's onclick event
+document.getElementById('fetchButton').onclick = displayGuests;
+
+
 
 function editGuest(index) {
     const guests = JSON.parse(localStorage.getItem('guests')) || [];
@@ -149,6 +201,7 @@ function calculateTotalAdvance() {
         document.getElementById('totalAdvance').textContent = 'Total Advance: ₹0.00';
     }
 }
+
 
 function showToast(message, type = 'success') {
     const toastContainer = document.getElementById('toastContainer');
