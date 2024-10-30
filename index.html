@@ -9,7 +9,7 @@
 <body>
 
     <!-- Navigation Section -->
-    <div>
+      <div>
         <button onclick="showSection('guest-registration')">Guest Registration</button>
         <!-- <button onclick="showSection('bill-generate')">Generate Bill</button> -->
         <button onclick="showSection('bill-generate')">Generate Bill</button>
@@ -50,8 +50,13 @@
         <!-- Guest List -->
        
         
-        <p> <span id="totalAdvance">0</span></p>
+        <p id="totalAdvance">Total Advance: ₹0.00</p>
+       <button onclick="calculateTotalAdvance()">Show Total Advance</button>
+
+        <!-- <div id="guestList"></div> -->
+        <button onclick="displayGuests()">Show All Guests</button>
         <div id="guestList"></div>
+
         
     </div>
 
@@ -71,8 +76,12 @@
 <label for="roomRent">Room Rent:</label>
 <input type="number" id="roomRent" placeholder="Enter room rent amount" required>
 
+    <label for="advance">Advance:</label>
+    <input type="number" id="advance" placeholder="Enter advance fee" required>
+
+
 <label for="utilities">Utilities:</label>
-<input type="number" id="utilities" placeholder="Enter utility charges" required>
+<input type="text" id="utilities" placeholder="Enter utility charges" required>
 
             <button type="submit">Generate Bill</button>
         </form>
